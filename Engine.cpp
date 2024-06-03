@@ -41,4 +41,8 @@ void UEngine::Tick()
 
 void UEngine::Render()
 {
+	for (auto Actor : Actors)
+	{
+		Actor->Render();
+	}
 }

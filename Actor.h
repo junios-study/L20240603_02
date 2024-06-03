@@ -3,6 +3,7 @@ class AActor
 {
 public:
 	AActor();
+	AActor(int NewX, int NewY, char NewShape);
 	virtual ~AActor();
 
 	int X;
