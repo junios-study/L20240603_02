@@ -8,8 +8,14 @@
 #include "Actor.h"
 #include "Player.h"
 #include "Wall.h"
+#include "Floor.h"
+#include "Goal.h"
+#include "Monster.h"
 
 using namespace std;
+
+int UEngine::KeyCode = 0;
+
 
 UEngine::UEngine()
 {
@@ -51,21 +57,58 @@ void UEngine::LoadLevel(std::string MapFilename)
 			if (Map[X] == 'P')
 			{
 				SpawnActor(new APlayer(X, Y));
+				SpawnActor(new AFloor(X, Y));
 			}
 			else if (Map[X] == '*')
 			{
 				SpawnActor(new AWall(X, Y));
+				SpawnActor(new AFloor(X, Y));
 			}
+			else if (Map[X] == ' ')
+			{
+				SpawnActor(new AFloor(X, Y));
+			}
+			else if (Map[X] == 'M')
+			{
+				SpawnActor(new AMonster(X, Y));
+				SpawnActor(new AFloor(X, Y));
+			}
+			else if (Map[X] == 'G')
+			{
+				SpawnActor(new AGoal(X, Y));
+				SpawnActor(new AFloor(X, Y));
+			}
+
 		}
 		Y++;
 	}
 
+	//Sort
+	Sort();
+
 	InputFile.close();
+}
+
+void UEngine::Sort()
+{
+	AActor* Temp;
+	for (int i = 0; i < Actors.size(); ++i)
+	{
+		for (int j = i + 1; j < Actors.size(); ++j)
+		{
+			if (Actors[i]->Layer > Actors[j]->Layer)
+			{
+				Temp = Actors[i];
+				Actors[i] = Actors[j];
+				Actors[j] = Temp;
+			}
+		}
+	}
 }
 
 void UEngine::Input()
 {
-	_getch();
+	KeyCode = _getch();
 }
 
 void UEngine::Tick()

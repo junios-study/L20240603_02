@@ -7,13 +7,15 @@ AActor::AActor()
 	X = 0;
 	Y = 0;
 	Shape = ' ';
+	Layer = 0;
 }
 
-AActor::AActor(int NewX, int NewY, char NewShape)
+AActor::AActor(int NewX, int NewY, char NewShape, int NewLayer)
 {
 	X = NewX;
 	Y = NewY;
 	Shape = NewShape;
+	Layer = NewLayer;
 }
 
 AActor::~AActor()

@@ -20,11 +20,17 @@ public:
 
 	void LoadLevel(std::string MapFilename);
 
+	void Sort();
+
 	vector<AActor*> Actors;
+
+	static int KeyCode;
+
 protected:
 	void Input();
 	void Tick();
 	void Render();
 
 };
+
 
