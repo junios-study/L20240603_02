@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -17,6 +18,7 @@ public:
 
 	bool IsRunning;
 
+	void LoadLevel(std::string MapFilename);
 
 	vector<AActor*> Actors;
 protected:
