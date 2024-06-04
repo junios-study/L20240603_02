@@ -1,63 +1,43 @@
 #include "Engine.h"
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <list>
+
 
 using namespace std;
 
-void T()
-{
-	cout << "T" << endl;
-}
-
-void Y()
-{
-	cout << "Y" << endl;
-}
-
-void Test(void (*FunctionPointer)())
-{
-	for (int i = 0; i < 100; ++i)
-	{
-		if (i > 50)
-		{
-			FunctionPointer();
-		}
-	}
-}
-
-void EnterPointer(void* P,int Count, int ElementOfSize)
-{
-
-}
-
-class UObject
-{
-
-};
-
-class AActor : public UObject
-{
-
-};
-
-class APawn : public AActor
-{
-
-};
 
 int main()
 {
-	UObject* Object = new UObject();
-	UObject* Object = new AActor();
-	UObject* Object = new APawn();
+	//Container
+	//iterator, i
+	vector<int> Datas;
+	list<int> Datas2;
+	Datas.push_back(1);
+	Datas.push_back(2);
+	Datas.push_back(3);
 
-	int* PA = nullptr;
-	float* PF = nullptr;
+	Datas2.push_back(4);
+	Datas2.push_back(5);
+	Datas2.push_back(6);
 
-	EnterPointer(PA);
-	EnterPointer(PF);
-
+	for (int i = 0; i < Datas.size(); ++i)
+	{
+		cout << Datas[i] << endl;;
+	}
+	for (vector<int>::reverse_iterator iter = Datas.rbegin(); iter != Datas.rend(); ++iter)
+	{
+		cout << *iter << endl;;
+	}
+	for (auto iter = Datas2.rbegin(); iter != Datas2.rend(); ++iter )
+	{
+		cout << *iter << endl;;
+	}
+	for (auto Data : Datas)
+	{
+		cout << Data << endl;;
+	}
+	
 
 	
 	return 0;
