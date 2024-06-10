@@ -1,4 +1,5 @@
 #include "Monster.h"
+#include "Engine.h"
 
 AMonster::AMonster()
 {
@@ -20,4 +21,61 @@ AMonster::AMonster(int NewX, int NewY, char NewShape)
 
 AMonster::~AMonster()
 {
+}
+
+void AMonster::Tick()
+{
+	int Direction = rand() % 4;
+
+	switch (Direction)
+	{
+	case 0:
+		if (Predict(X, Y - 1))
+		{
+			Y--;
+		}
+		break;
+	case 1:
+		if (Predict(X, Y + 1))
+		{
+			Y++;
+		}
+		break;
+	case 2:
+		if (Predict(X - 1, Y))
+		{
+			X--;
+		}
+		break;
+	case 3:
+		if (Predict(X + 1, Y))
+		{
+			X++;
+		}
+		break;
+	}
+}
+
+bool AMonster::Predict(int PredictX, int PredictY)
+{
+	for (auto OtherActor : GEngine->Actors)
+	{
+		if (this == OtherActor)
+		{
+			continue;
+		}
+
+		if (OtherActor->IsCollision == false)
+		{
+			continue;
+		}
+
+		if (PredictX == OtherActor->X && PredictY == OtherActor->Y)
+		{
+			return false;
+		}
+	}
+
+
+	return true;
 }
