@@ -15,15 +15,31 @@
 using namespace std;
 
 int UEngine::KeyCode = 0;
-
+UEngine* UEngine::Instance = nullptr;
 
 UEngine::UEngine()
 {
-	IsRunning = true;
+	Init();
 }
 
 UEngine::~UEngine()
 {
+	Term();
+}
+
+void UEngine::Init()
+{
+	IsRunning = true;
+}
+
+void UEngine::Term()
+{
+	for (auto Actor : Actors)
+	{
+		delete Actor;
+	}
+
+	Actors.clear();
 }
 
 void UEngine::SpawnActor(AActor* NewActor)
@@ -43,6 +59,8 @@ void UEngine::Run()
 
 void UEngine::LoadLevel(std::string MapFilename)
 {
+	Term();
+
 	char Map[256];
 
 	ifstream InputFile;

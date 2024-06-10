@@ -16,6 +16,6 @@ public:
 	virtual void Tick();
 	virtual void Render();
 
-
+	bool IsCollision;
 };
 

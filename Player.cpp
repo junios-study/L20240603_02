@@ -8,15 +8,17 @@ APlayer::APlayer()
 	Y = 1;
 	Shape = ' ';
 	Layer = 4;
+	IsCollision = true;
 }
 
 APlayer::APlayer(int NewX, int NewY, char NewShape)
 {
-//	AActor::AActor(NewX, NewY, NewShape);
+	//	AActor::AActor(NewX, NewY, NewShape);
 	X = NewX;
 	Y = NewY;
 	Shape = NewShape;
 	Layer = 4;
+	IsCollision = true;
 }
 
 APlayer::~APlayer()
@@ -27,21 +29,57 @@ void APlayer::Tick()
 {
 	switch (UEngine::KeyCode)
 	{
-		case 'W':
-		case 'w':
+	case 'W':
+	case 'w':
+		if (Predict(X, Y - 1))
+		{
 			Y--;
-			break;
-		case 'S':
-		case 's':
+		}
+		break;
+	case 'S':
+	case 's':
+		if (Predict(X, Y + 1))
+		{
 			Y++;
-			break;
-		case 'A':
-		case 'a':
+		}
+		break;
+	case 'A':
+	case 'a':
+		if (Predict(X - 1, Y))
+		{
 			X--;
-			break;
-		case 'D':
-		case 'd':
+		}
+		break;
+	case 'D':
+	case 'd':
+		if (Predict(X + 1, Y))
+		{
 			X++;
-			break;
+		}
+		break;
 	}
+}
+
+bool APlayer::Predict(int PredictX, int PredictY)
+{
+	for (auto OtherActor : GEngine->Actors)
+	{
+		if (this == OtherActor)
+		{
+			continue;
+		}
+
+		if (OtherActor->IsCollision == false)
+		{
+			continue;
+		}
+
+		if (PredictX == OtherActor->X && PredictY == OtherActor->Y)
+		{
+			return false;
+		}
+	}
+
+
+	return true;
 }

@@ -10,6 +10,6 @@ public:
 
 	virtual void Tick() override;
 
-
+	bool Predict(int PredictX, int PredictY);
 };
 

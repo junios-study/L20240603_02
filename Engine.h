@@ -6,11 +6,31 @@ using namespace std;
 
 class AActor;
 
+//sigleton patern
 class UEngine
 {
-public:
+protected:
 	UEngine();
+
+public:
 	virtual ~UEngine();
+
+	static UEngine* GetInstance()
+	{
+		if (!Instance)
+		{
+			Instance = new UEngine();
+
+			return Instance;
+		}
+
+		return Instance;
+	}
+
+
+	void Init();
+
+	void Term();
 
 	void SpawnActor(AActor* NewActor);
 
@@ -31,6 +51,10 @@ protected:
 	void Tick();
 	void Render();
 
+	static UEngine* Instance;
+
 };
+
+#define GEngine UEngine::GetInstance()
 
 

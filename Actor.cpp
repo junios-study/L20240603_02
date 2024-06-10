@@ -8,6 +8,7 @@ AActor::AActor()
 	Y = 0;
 	Shape = ' ';
 	Layer = 0;
+	IsCollision = false;
 }
 
 AActor::AActor(int NewX, int NewY, char NewShape, int NewLayer)
@@ -16,6 +17,7 @@ AActor::AActor(int NewX, int NewY, char NewShape, int NewLayer)
 	Y = NewY;
 	Shape = NewShape;
 	Layer = NewLayer;
+	IsCollision = false;
 }
 
 AActor::~AActor()
