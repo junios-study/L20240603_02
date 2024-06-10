@@ -5,15 +5,11 @@ using namespace std;
 
 int main()
 {
-	UEngine* MyEngine = UEngine::GetInstance();
-//	UEngine* MyEngine2 = new UEngine();
+	GEngine->LoadLevel("data.map");
 
-	MyEngine->LoadLevel("data.map");
+	GEngine->Run();
 
-	MyEngine->Run();
-
-	delete MyEngine;
-
+	delete GEngine;
 
 	return 0;
 }
