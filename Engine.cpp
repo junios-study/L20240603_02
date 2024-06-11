@@ -75,8 +75,6 @@ void UEngine::Run()
 
 void UEngine::LoadLevel(std::string MapFilename)
 {
-	Term();
-
 	char Map[256];
 
 	ifstream InputFile;
@@ -178,11 +176,10 @@ void UEngine::Render()
 	SDL_SetRenderDrawColor(MyRenderer, 0, 0, 0, 0);
 	SDL_RenderClear(MyRenderer);
 
-	for (auto Actor : Actors)
-	{
-		Actor->Render();
-	}
+	//for (auto Actor : Actors)
+	//{
+	//	Actor->Render();
+	//}
 
 	SDL_RenderPresent(MyRenderer);
-
 }
