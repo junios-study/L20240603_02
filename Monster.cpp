@@ -8,6 +8,11 @@ AMonster::AMonster()
 	Shape = ' ';
 	Layer = 5;
 	IsCollision = false;
+
+	R = 255;
+	G = 0;
+	B = 255;
+	ElapsedTime = 0;
 }
 
 AMonster::AMonster(int NewX, int NewY, char NewShape)
@@ -17,6 +22,12 @@ AMonster::AMonster(int NewX, int NewY, char NewShape)
 	Shape = NewShape;
 	Layer = 5;
 	IsCollision = false;
+
+	R = 255;
+	G = 0;
+	B = 255;
+
+	ElapsedTime = 0;
 }
 
 AMonster::~AMonster()
@@ -25,6 +36,17 @@ AMonster::~AMonster()
 
 void AMonster::Tick()
 {
+	ElapsedTime += GEngine->DeltaSeconds;
+
+	//SDL_Log("%d %d", ElapsedTime, GEngine->DeltaSeconds);
+
+	if (ElapsedTime < 500)
+	{
+		return;
+	}
+
+	ElapsedTime = 0;
+
 	int Direction = rand() % 4;
 
 	switch (Direction)

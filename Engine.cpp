@@ -19,6 +19,8 @@ UEngine* UEngine::Instance = nullptr;
 
 UEngine::UEngine()
 {
+	DeltaSeconds = 0;
+	LastTime = 0;
 	Init();
 }
 
@@ -35,7 +37,7 @@ void UEngine::Init()
 		return;
 	}
 
-	MyWindow = SDL_CreateWindow("Simple GameEngine", 100, 100, 640, 480, SDL_WINDOW_OPENGL);
+	MyWindow = SDL_CreateWindow("Simple GameEngine", 100, 100, 600, 600, SDL_WINDOW_OPENGL);
 	MyRenderer = SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE /*SDL_RENDERER_SOFTWARE*/);
 
 	srand((unsigned int)(time(0)));
@@ -68,6 +70,9 @@ void UEngine::Run()
 	while (IsRunning)
 	{
 		Input();
+
+		DeltaSeconds = SDL_GetTicks64() - LastTime;
+		LastTime = SDL_GetTicks64();
 		Tick();
 		Render();
 	}
@@ -176,10 +181,10 @@ void UEngine::Render()
 	SDL_SetRenderDrawColor(MyRenderer, 0, 0, 0, 0);
 	SDL_RenderClear(MyRenderer);
 
-	//for (auto Actor : Actors)
-	//{
-	//	Actor->Render();
-	//}
+	for (auto Actor : Actors)
+	{
+		Actor->Render();
+	}
 
 	SDL_RenderPresent(MyRenderer);
 }

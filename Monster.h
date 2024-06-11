@@ -1,4 +1,5 @@
 #pragma once
+#include "SDL.h"
 #include "Actor.h"
 class AMonster : public AActor
 {
@@ -8,5 +9,7 @@ public:
 	virtual ~AMonster();
 	virtual void Tick() override;
 	bool Predict(int PredictX, int PredictY);
+
+	Uint64 ElapsedTime;
 };
 

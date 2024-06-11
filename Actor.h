@@ -17,5 +17,10 @@ public:
 	virtual void Render();
 
 	bool IsCollision;
+
+	int R;
+	int G;
+	int B;
+	int SpriteSize;
 };
 

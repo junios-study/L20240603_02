@@ -9,6 +9,9 @@ APlayer::APlayer()
 	Shape = ' ';
 	Layer = 4;
 	IsCollision = true;
+	R = 0;
+	G = 255;
+	B = 0;
 }
 
 APlayer::APlayer(int NewX, int NewY, char NewShape)
@@ -19,6 +22,10 @@ APlayer::APlayer(int NewX, int NewY, char NewShape)
 	Shape = NewShape;
 	Layer = 4;
 	IsCollision = true;
+
+	R = 0;
+	G = 255;
+	B = 0;
 }
 
 APlayer::~APlayer()

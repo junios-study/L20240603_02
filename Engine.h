@@ -55,6 +55,9 @@ public:
 	SDL_Event MyEvent;
 	bool IsRunning;
 
+	Uint64 DeltaSeconds;
+	Uint64 LastTime;
+
 protected:
 	void Input();
 	void Tick();
