@@ -4,6 +4,12 @@
 
 using namespace std;
 
+#include "SDL.h"
+
+
+#pragma comment(lib, "SDL2")
+#pragma comment(lib, "SDL2main")
+
 class AActor;
 
 //sigleton patern
@@ -36,8 +42,6 @@ public:
 
 	void Run();
 
-	bool IsRunning;
-
 	void LoadLevel(std::string MapFilename);
 
 	void Sort();
@@ -45,6 +49,11 @@ public:
 	vector<AActor*> Actors;
 
 	static int KeyCode;
+
+	SDL_Window* MyWindow;
+	SDL_Renderer* MyRenderer;
+	SDL_Event MyEvent;
+	bool IsRunning;
 
 protected:
 	void Input();

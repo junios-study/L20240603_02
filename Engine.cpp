@@ -29,6 +29,17 @@ UEngine::~UEngine()
 
 void UEngine::Init()
 {
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	{
+		cout << "Init error" << endl;
+		return;
+	}
+
+	MyWindow = SDL_CreateWindow("Simple GameEngine", 100, 100, 640, 480, SDL_WINDOW_OPENGL);
+	MyRenderer = SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE /*SDL_RENDERER_SOFTWARE*/);
+
+	srand((unsigned int)(time(0)));
+
 	IsRunning = true;
 }
 
@@ -40,6 +51,11 @@ void UEngine::Term()
 	}
 
 	Actors.clear();
+
+	SDL_DestroyRenderer(MyRenderer);
+	SDL_DestroyWindow(MyWindow);
+
+	SDL_Quit();
 }
 
 void UEngine::SpawnActor(AActor* NewActor)
@@ -126,11 +142,30 @@ void UEngine::Sort()
 
 void UEngine::Input()
 {
-	KeyCode = _getch();
+	//KeyCode = _getch();
+
+	SDL_PollEvent(&MyEvent);
 }
 
 void UEngine::Tick()
 {
+	switch (MyEvent.type)
+	{
+	case SDL_QUIT:
+		IsRunning = false;
+		break;
+	case SDL_MOUSEBUTTONDOWN:
+		cout << "Mouse Button Down" << endl;
+		break;
+	case SDL_KEYDOWN:
+		switch (MyEvent.key.keysym.sym)
+		{
+		case SDLK_ESCAPE:
+			IsRunning = false;
+			break;
+		}
+	}
+
 	for (auto Actor : Actors)
 	{
 		Actor->Tick();
@@ -139,8 +174,15 @@ void UEngine::Tick()
 
 void UEngine::Render()
 {
+	//ClearScreen
+	SDL_SetRenderDrawColor(MyRenderer, 0, 0, 0, 0);
+	SDL_RenderClear(MyRenderer);
+
 	for (auto Actor : Actors)
 	{
 		Actor->Render();
 	}
+
+	SDL_RenderPresent(MyRenderer);
+
 }
