@@ -24,6 +24,9 @@ AFloor::AFloor(int NewX, int NewY, char NewShape)
 	R = 100;
 	G = 100;
 	B = 100;
+
+	Filename = "data/floor.bmp";
+	LoadTexture(Filename);
 }
 
 AFloor::~AFloor()

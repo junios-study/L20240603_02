@@ -12,6 +12,10 @@ APlayer::APlayer()
 	R = 0;
 	G = 255;
 	B = 0;
+
+	ColorKeyR = 255;
+	ColorKeyG = 0;
+	ColorKeyB = 255;
 }
 
 APlayer::APlayer(int NewX, int NewY, char NewShape)
@@ -26,6 +30,15 @@ APlayer::APlayer(int NewX, int NewY, char NewShape)
 	R = 0;
 	G = 255;
 	B = 0;
+
+	ColorKeyR = 255;
+	ColorKeyG = 0;
+	ColorKeyB = 255;
+
+	Filename = "data/player.bmp";
+	LoadTexture(Filename);
+
+
 }
 
 APlayer::~APlayer()
@@ -64,6 +77,43 @@ void APlayer::Tick()
 			X++;
 		}
 		break;
+	}
+}
+
+void APlayer::Render()
+{
+	SDL_Rect MyRect;
+	MyRect.x = X * SpriteSize;
+	MyRect.y = Y * SpriteSize;
+	MyRect.w = SpriteSize;
+	MyRect.h = SpriteSize;
+
+	int SpriteSizeX = MySurface->w / 5;
+	int SpriteSizeY = MySurface->h / 5;
+	SDL_Rect SrcRect;
+
+	SrcRect.x = SpriteSizeX * SpirteIndexX;
+	SrcRect.y = SpriteSizeY * SpirteIndexY;
+	SrcRect.w = SpriteSizeX;
+	SrcRect.h = SpriteSizeY;
+	ElapsedTime += GEngine->GetWorldDeltaSeconds();
+	if (ElapsedTime >= 200)
+	{
+		SpirteIndexX++;
+		SpirteIndexX = SpirteIndexX % 5;
+		ElapsedTime = 0;
+	}
+
+	if (MyTexture)
+	{
+		SDL_RenderCopy(GEngine->MyRenderer,
+			MyTexture,
+			&SrcRect,
+			&MyRect);
+	}
+	else
+	{
+		SDL_RenderFillRect(GEngine->MyRenderer, &MyRect);
 	}
 }
 

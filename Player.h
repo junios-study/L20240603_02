@@ -9,7 +9,13 @@ public:
 	virtual ~APlayer();
 
 	virtual void Tick() override;
+	virtual void Render() override;
 
 	bool Predict(int PredictX, int PredictY);
+
+	int SpirteIndexX;
+	int SpirteIndexY;
+	Uint64 ElapsedTime;
+
 };
 

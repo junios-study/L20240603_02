@@ -24,6 +24,8 @@ AWall::AWall(int NewX, int NewY, char NewShape)
 	R = 255;
 	G = 0;
 	B = 0;
+	Filename = "data/wall.bmp";
+	LoadTexture(Filename);
 }
 
 AWall::~AWall()

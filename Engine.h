@@ -55,13 +55,15 @@ public:
 	SDL_Event MyEvent;
 	bool IsRunning;
 
-	Uint64 DeltaSeconds;
-	Uint64 LastTime;
+	inline Uint64 GetWorldDeltaSeconds() { return DeltaSeconds; }
 
 protected:
 	void Input();
 	void Tick();
 	void Render();
+
+	Uint64 DeltaSeconds;
+	Uint64 LastTime;
 
 	static UEngine* Instance;
 

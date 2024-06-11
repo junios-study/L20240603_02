@@ -28,6 +28,8 @@ AMonster::AMonster(int NewX, int NewY, char NewShape)
 	B = 255;
 
 	ElapsedTime = 0;
+	Filename = "data/monster.bmp";
+	LoadTexture(Filename);
 }
 
 AMonster::~AMonster()
@@ -36,7 +38,7 @@ AMonster::~AMonster()
 
 void AMonster::Tick()
 {
-	ElapsedTime += GEngine->DeltaSeconds;
+	ElapsedTime += GEngine->GetWorldDeltaSeconds();
 
 	//SDL_Log("%d %d", ElapsedTime, GEngine->DeltaSeconds);
 

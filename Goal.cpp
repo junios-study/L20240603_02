@@ -24,6 +24,9 @@ AGoal::AGoal(int NewX, int NewY, char NewShape)
 	R = 0;
 	G = 0;
 	B = 255;
+
+	Filename = "data/goal.bmp";
+	LoadTexture(Filename);
 }
 
 AGoal::~AGoal()

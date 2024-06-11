@@ -16,6 +16,11 @@ AActor::AActor()
 	G = 0;
 	B = 0;
 	SpriteSize = 60;
+
+	ColorKeyR = 255;
+	ColorKeyG = 255;
+	ColorKeyB = 255;
+
 }
 
 AActor::AActor(int NewX, int NewY, char NewShape, int NewLayer)
@@ -29,6 +34,10 @@ AActor::AActor(int NewX, int NewY, char NewShape, int NewLayer)
 	G = 0;
 	B = 0;
 	SpriteSize = 60;
+
+	ColorKeyR = 255;
+	ColorKeyG = 255;
+	ColorKeyB = 255;
 }
 
 AActor::~AActor()
@@ -57,6 +66,25 @@ void AActor::Render()
 	MyRect.y = Y * SpriteSize;
 	MyRect.w = SpriteSize;
 	MyRect.h = SpriteSize;
+	if (MyTexture)
+	{
+		SDL_RenderCopy(GEngine->MyRenderer,
+			MyTexture,
+			nullptr,
+			&MyRect);
+	}
+	else
+	{
+		SDL_RenderFillRect(GEngine->MyRenderer, &MyRect);
+	}
+}
 
-	SDL_RenderFillRect(GEngine->MyRenderer, &MyRect);
+void AActor::LoadTexture(std::string TextureFilename)
+{
+	//RAM Image
+	MySurface = SDL_LoadBMP(TextureFilename.c_str());
+	//RAM -> VRAM
+	SDL_SetColorKey(MySurface, 1, SDL_MapRGB(MySurface->format,
+		ColorKeyR, ColorKeyG, ColorKeyB));
+	MyTexture = SDL_CreateTextureFromSurface(GEngine->MyRenderer, MySurface);
 }
