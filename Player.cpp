@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Engine.h"
+#include "SDL.h"
 
 APlayer::APlayer()
 {
@@ -47,36 +48,44 @@ APlayer::~APlayer()
 
 void APlayer::Tick()
 {
-	switch (UEngine::KeyCode)
+	switch (GEngine->MyEvent.type)
 	{
-	case 'W':
-	case 'w':
-		if (Predict(X, Y - 1))
+	case SDL_KEYDOWN:
+		switch (GEngine->MyEvent.key.keysym.sym)
 		{
-			Y--;
+		case SDLK_w:
+		case SDLK_UP:
+			SpirteIndexY = 2;
+			if (Predict(X, Y - 1))
+			{
+				Y--;
+			}
+			break;
+		case SDLK_s:
+		case SDLK_DOWN:
+			SpirteIndexY = 3;
+			if (Predict(X, Y + 1))
+			{
+				Y++;
+			}
+			break;
+		case SDLK_a:
+		case SDLK_LEFT:
+			SpirteIndexY = 0;
+			if (Predict(X - 1, Y))
+			{
+				X--;
+			}
+			break;
+		case SDLK_d:
+		case SDLK_RIGHT:
+			SpirteIndexY = 1;
+			if (Predict(X + 1, Y))
+			{
+				X++;
+			}
+			break;
 		}
-		break;
-	case 'S':
-	case 's':
-		if (Predict(X, Y + 1))
-		{
-			Y++;
-		}
-		break;
-	case 'A':
-	case 'a':
-		if (Predict(X - 1, Y))
-		{
-			X--;
-		}
-		break;
-	case 'D':
-	case 'd':
-		if (Predict(X + 1, Y))
-		{
-			X++;
-		}
-		break;
 	}
 }
 
