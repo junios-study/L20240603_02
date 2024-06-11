@@ -6,7 +6,7 @@ public:
 	AMonster();
 	AMonster(int NewX, int NewY, char NewShape = 'M');
 	virtual ~AMonster();
-	void Tick();
+	virtual void Tick() override;
 	bool Predict(int PredictX, int PredictY);
 };
 
