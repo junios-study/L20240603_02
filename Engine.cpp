@@ -11,6 +11,7 @@
 #include "Floor.h"
 #include "Goal.h"
 #include "Monster.h"
+#include "TextActor.h"
 
 using namespace std;
 
@@ -43,6 +44,9 @@ void UEngine::Init()
 	srand((unsigned int)(time(0)));
 
 	IsRunning = true;
+
+	TTF_Init();
+	Mix_OpenAudio(48000, MIX_DEFAULT_CHANNELS, 2, 4096);
 }
 
 void UEngine::Term()
@@ -56,6 +60,10 @@ void UEngine::Term()
 
 	SDL_DestroyRenderer(MyRenderer);
 	SDL_DestroyWindow(MyWindow);
+
+	TTF_Quit();
+
+	Mix_CloseAudio();
 
 	SDL_Quit();
 }
@@ -119,6 +127,8 @@ void UEngine::LoadLevel(std::string MapFilename)
 		}
 		Y++;
 	}
+
+	SpawnActor(new ATextActor());
 
 	//Sort
 	Sort();
