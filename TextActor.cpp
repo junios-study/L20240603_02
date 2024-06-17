@@ -6,11 +6,11 @@ ATextActor::ATextActor()
 	X = 100;
 	Y = 100;
 
-	FontSize = 30;
+	FontSize = 60;
 
 	Font = TTF_OpenFont("data/NanumGothicCoding.ttf", FontSize);
 
-	Text = "Hello World!";
+	Text = "Hell0 World!";
 	R = 0;
 	G = 0;
 	B = 0;
@@ -28,6 +28,9 @@ ATextActor::ATextActor()
 
 ATextActor::~ATextActor()
 {
+	SDL_FreeSurface(MySurface);
+	SDL_DestroyTexture(MyTexture);
+	TTF_CloseFont(Font);
 }
 
 void ATextActor::Render()

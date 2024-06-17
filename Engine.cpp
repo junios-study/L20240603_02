@@ -12,6 +12,7 @@
 #include "Goal.h"
 #include "Monster.h"
 #include "TextActor.h"
+#include "SoundActor.h"
 
 using namespace std;
 
@@ -46,7 +47,10 @@ void UEngine::Init()
 	IsRunning = true;
 
 	TTF_Init();
-	Mix_OpenAudio(48000, MIX_DEFAULT_CHANNELS, 2, 4096);
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) == -1)
+	{
+		int b = 0;
+	}
 }
 
 void UEngine::Term()
@@ -129,6 +133,7 @@ void UEngine::LoadLevel(std::string MapFilename)
 	}
 
 	SpawnActor(new ATextActor());
+	SpawnActor(new ASoundActor());
 
 	//Sort
 	Sort();

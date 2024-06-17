@@ -142,6 +142,7 @@ copy "$(SolutionDir)SDL2_mixer\lib\x64\optional\*.dll" "$(TargetDir)"
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SoundActor.cpp" />
     <ClCompile Include="TextActor.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -152,6 +153,7 @@ copy "$(SolutionDir)SDL2_mixer\lib\x64\optional\*.dll" "$(TargetDir)"
     <ClInclude Include="Goal.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SoundActor.h" />
     <ClInclude Include="TextActor.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
